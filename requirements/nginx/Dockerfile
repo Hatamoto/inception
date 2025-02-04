@@ -21,8 +21,8 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 # Optional: Alpine's nginx package typically runs as user 'nginx' by default,
 # whereas your original Dockerfile uses 'www-data'. If you want to keep 
 # 'www-data', you must create it manually:
-RUN addgroup -g 82 -S www-data && \
-    adduser -u 82 -D -S -G www-data www-data
+# RUN addgroup -g 82 -S www-data && \
+#    adduser -u 82 -D -S -G www-data www-data
 
 # Set permissions (adjust the user/group to match whichever you're actually using)
 RUN chown -R www-data:www-data /var/www/html /var/log/nginx && \
