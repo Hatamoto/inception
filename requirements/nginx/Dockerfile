@@ -22,10 +22,10 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 RUN chown -R nginx:nginx /var/www/html /var/log/nginx
 
 # Expose port 80 (and 443 if you plan to serve HTTPS)
-EXPOSE 80
+# EXPOSE 80
 
 # For SSL, you might also EXPOSE 443
-# EXPOSE 443
+EXPOSE 443
 
 # Run nginx in the foreground
 CMD ["nginx", "-g", "daemon off;"]
