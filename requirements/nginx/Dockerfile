@@ -18,15 +18,8 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 # Copy your custom nginx.conf
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-# Optional: Alpine's nginx package typically runs as user 'nginx' by default,
-# whereas your original Dockerfile uses 'www-data'. If you want to keep 
-# 'www-data', you must create it manually:
-# RUN addgroup -g 82 -S www-data && \
-#    adduser -u 82 -D -S -G www-data www-data
-
 # Set permissions (adjust the user/group to match whichever you're actually using)
-RUN chown -R www-data:www-data /var/www/html /var/log/nginx && \
-    chmod 755 /var/www/html
+RUN chown -R nginx:nginx /var/www/html /var/log/nginx
 
 # Expose port 80 (and 443 if you plan to serve HTTPS)
 EXPOSE 80
