@@ -4,11 +4,16 @@ FROM alpine:3.21.2
 # Set the maintainer
 USER nginx
 
-# Install packages via apk
+# Install openssl first to avoid conflicts
 RUN apk update && \
     apk upgrade && \
-	addgroup -S nginx && adduser -S nginx -G nginx && \
-    apk add --no-cache nginx openssl
+    apk add --no-cache openssl
+
+# Create nginx user and group before installing nginx
+RUN addgroup -S nginx && adduser -S nginx -G nginx
+
+# Install nginx after the user has been created
+RUN apk add --no-cache nginx
 
 # Create necessary directories (same as before)
 RUN mkdir -p /var/log/nginx /var/www/html
@@ -26,10 +31,7 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 RUN chown -R nginx:nginx /var/www/html /var/log/nginx
 
 # Expose port 80 (and 443 if you plan to serve HTTPS)
-EXPOSE 80
-
-# For SSL (https), you might also EXPOSE 443
-EXPOSE 443
+EXPOSE 80 443
 
 # Run nginx in the foreground
 CMD ["nginx", "-g", "daemon off;"]
