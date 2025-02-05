@@ -1,6 +1,9 @@
 # Use Alpine as the base
 FROM alpine:3.21.2
 
+# Set the maintainer
+USER nginx
+
 # Install packages via apk
 RUN apk update && \
     apk upgrade && \
