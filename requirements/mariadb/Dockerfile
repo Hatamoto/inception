@@ -12,6 +12,9 @@ COPY init.sql /docker-entrypoint-initdb.d/init.sql
 # Prepare MariaDB runtime directory
 RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
 
+# Initialize MariaDB system tables
+RUN mariadb-install-db --user=mysql --datadir=/var/lib/mysql
+
 # Expose MariaDB port
 EXPOSE 3306
 
