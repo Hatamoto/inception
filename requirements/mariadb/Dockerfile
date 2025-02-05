@@ -1,12 +1,19 @@
 # Use Alpine as the base
 FROM alpine:3.21.2
 
-RUN apt update && apt upgrade && apt install -y \ 
-	mariadb-server
+# Install MariaDB
+RUN apk update && \
+	apk upgrade && \
+	apk add --no-cache mariadb mariadb-client
 
-COPY 50-server.cnf /etc/mysql/mariadb.conf.d/
-COPY init.sql /etc/mysql/init.sql
+# Copy the custom configuration file
+COPY init.sql /docker-entrypoint-initdb.d/init.sql
 
-RUN mkdir -p /run/mysqld
+# Prepare MariaDB runtime directory
+RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
 
-CMD ["mysqld", "--user=root", "--console"]
+# Expose MariaDB port
+EXPOSE 3306
+
+# Run MariaDB server
+CMD ["mysqld", "--user=mysql", "--console"]
