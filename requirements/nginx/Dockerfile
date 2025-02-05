@@ -10,7 +10,7 @@ RUN apk update && \
     apk add --no-cache openssl
 
 # Create nginx user and group AFTER ensuring system files exist
-RUN addgroup -S nginx && adduser -S nginx -G nginx
+RUN addgroup -S nginx && adduser -S -h /var/www nginx -G nginx
 
 # Install nginx AFTER user/group are confirmed
 RUN apk add --no-cache nginx
