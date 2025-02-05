@@ -4,13 +4,13 @@ FROM alpine:3.21.2
 # Set the maintainer
 USER nginx
 
+# Create a new user and group called nginx
+RUN addgroup -S nginx && adduser -S nginx -G nginx
+
 # Install openssl first to avoid conflicts
 RUN apk update && \
     apk upgrade && \
     apk add --no-cache openssl
-
-# Create nginx user and group before installing nginx
-RUN addgroup -S nginx && adduser -S nginx -G nginx
 
 # Install nginx after the user has been created
 RUN apk add --no-cache nginx
