@@ -1,8 +1,5 @@
 # This is the Docker compose file for the project
 
-# Compose file format version
-version: '3.8'
-
 # First the nginx service
 services:
   nginx:
