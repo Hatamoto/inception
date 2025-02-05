@@ -1,19 +1,19 @@
 # Use Alpine as the base
 FROM alpine:3.21.2
 
-# Install openssl first to avoid conflicts
+# Install openssl
 RUN apk update && \
     apk upgrade && \
     apk add --no-cache openssl
+
+# Install nginx
+RUN apk add --no-cache nginx
 
 # Create a new user and group called nginx
 RUN addgroup -S nginx && adduser -S nginx -G nginx
 
 # Set the maintainer
 USER nginx
-
-# Install nginx after the user has been created
-RUN apk add --no-cache nginx
 
 # Create necessary directories (same as before)
 RUN mkdir -p /var/log/nginx /var/www/html
