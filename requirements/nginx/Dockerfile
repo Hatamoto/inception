@@ -27,8 +27,10 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 # Copy your custom nginx.conf
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-# Set permissions (adjust the user/group to match whichever you're actually using)
-RUN chown -R nginx:nginx /var/www/html /var/log/nginx
+# Set ownership and permissions
+RUN chown -R nginx:nginx /var/www/html
+RUN chmod -R 644 /var/www/html/*
+RUN chmod 755 /var/www/html
 
 # Expose port 80 (and 443 if you plan to serve HTTPS)
 EXPOSE 80 443
