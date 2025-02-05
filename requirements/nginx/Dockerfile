@@ -7,6 +7,7 @@ USER nginx
 # Install packages via apk
 RUN apk update && \
     apk upgrade && \
+	addgroup -S nginx && adduser -S nginx -G nginx && \
     apk add --no-cache nginx openssl
 
 # Create necessary directories (same as before)
