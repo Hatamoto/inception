@@ -1,5 +1,5 @@
 # Use Alpine as the base
-FROM alpine:latest
+FROM alpine:3.21.2
 
 # Install packages via apk
 RUN apk update && \
