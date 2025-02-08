@@ -43,4 +43,5 @@ services:
 
 volumes:
   mariadb_data:
+  wordpress_data:
 
