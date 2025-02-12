@@ -1,5 +1,5 @@
 # Use Alpine as the base
-FROM alpine:3.21.2
+FROM alpine:3.21
 
 # Ensure necessary system files exist
 RUN touch /etc/passwd /etc/group /etc/shadow

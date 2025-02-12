@@ -11,6 +11,7 @@ services:
     depends_on:
       - mariadb
 
+# then the DB
   mariadb:
     build: requirements/mariadb/.
     container_name: mariadb
@@ -25,6 +26,7 @@ services:
     volumes:
       - mariadb_data:/var/lib/mysql # Persist data
 
+# then wordpress
   wordpress:
     image: wordpress:latest
     container_name: wordpress
