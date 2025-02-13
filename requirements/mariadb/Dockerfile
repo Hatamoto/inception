@@ -28,4 +28,4 @@ CMD ["/bin/sh", "-c", "\
 "]
 
 # Run MariaDB server
-# CMD ["mysqld", "--user=mysql", "--console"]
+CMD ["mysqld", "--user=mysql", "--console"]

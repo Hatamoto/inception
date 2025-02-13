@@ -1,8 +1,10 @@
 # Use Alpine as the base
 FROM alpine:3.21
 
+# Install PHP-FPM
 FROM php:8.1-fpm-alpine
 
+# Install dependencies
 RUN apk add --no-cache \
       wget \
       unzip \
@@ -13,9 +15,12 @@ RUN apk add --no-cache \
       oniguruma-dev \
     && docker-php-ext-install -j$(nproc) mysqli pdo pdo_mysql zip
 
+# Define the build argument
+ARG WORDPRESS_VERSION=6.7.2
+
 WORKDIR /var/www/html
 
-RUN wget https://wordpress.org/latest.tar.gz -O wordpress.tar.gz \
+RUN wget https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz -O wordpress.tar.gz \
     && tar -xzf wordpress.tar.gz --strip-components=1 \
     && rm wordpress.tar.gz
 
