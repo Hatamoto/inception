@@ -16,7 +16,7 @@ RUN addgroup -S nginx && adduser -S -h /var/www nginx -G nginx
 RUN apk add --no-cache nginx
 
 # Create necessary directories (same as before)
-RUN mkdir -p /var/log/nginx /var/www/html
+RUN mkdir -p /var/log/nginx /var/www/html /etc/nginx/certs/
 
 # Generate a self-signed certificate (same OpenSSL commands)
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
