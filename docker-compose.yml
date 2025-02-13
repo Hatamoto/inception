@@ -28,7 +28,7 @@ services:
 
 # then wordpress
   wordpress:
-    build: ./wordpress/.
+    build: requirements/wordpress/.
     container_name: wordpress
     restart: unless-stopped
     depends_on:
