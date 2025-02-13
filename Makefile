@@ -44,6 +44,9 @@ down:
 	@echo "Shutting down containers..."
 	docker compose down
 
+clean:
+	docker compose down -v --rmi all
+
 fclean:
-	down
+	clean
 	sudo rm -rf $(DATA_DIR)
