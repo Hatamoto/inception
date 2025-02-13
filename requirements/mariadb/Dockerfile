@@ -6,6 +6,9 @@ RUN apk update && \
 	apk upgrade && \
 	apk add --no-cache mariadb mariadb-client
 
+# Print the UID/GID for the mysql user
+RUN echo "mysql user details:" && id mysql
+
 # Copy configuration and init script
 COPY init.sql /docker-entrypoint-initdb.d/init.sql
 
