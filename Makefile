@@ -47,6 +47,5 @@ down:
 clean:
 	docker compose down -v --rmi all
 
-fclean:
-	clean
+fclean: clean
 	sudo rm -rf $(DATA_DIR)
