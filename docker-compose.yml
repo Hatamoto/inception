@@ -3,18 +3,23 @@
 # First the nginx service
 services:
   nginx:
-    build: requirements/nginx/.
     container_name: nginx
+    build: requirements/nginx/.
+    restart: always
+    #depends_on:
+    #  - mariadb
     ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - mariadb
+      - 443:443
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - network
+
 
 # then the DB
   mariadb:
-    build: requirements/mariadb/.
     container_name: mariadb
+    build: requirements/mariadb/.
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PSW}
@@ -24,23 +29,46 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /home/mburakow/data/mariadb_data:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
+      #- /home/mburakow/data/mariadb_data:/var/lib/mysql
+    networks:
+      - network
 
 # then wordpress
   wordpress:
     build: requirements/wordpress/.
     container_name: wordpress
-    restart: unless-stopped
     depends_on:
       - mariadb
+    restart: always
     environment:
       WORDPRESS_DB_HOST: mariadb
       WORDPRESS_DB_USER: ${MARIADB_USER}
       WORDPRESS_DB_PASSWORD: ${MARIADB_PSW}
       WORDPRESS_DB_NAME: ${MARIADB_DATABASE}
-    ports:
-      - "8080:80"
+    #ports:
+    #  - "8080:80"
     volumes:
-      - /home/mburakow/data/wordpress_data:/var/www/html
+      - wordpress_data:/var/www/html
+    networks:
+      - network
 
+# create named volumes for the data
+volumes:
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/mburakow/data/mariadb_data
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/mburakow/data/wordpress_data
+
+networks:
+  network:
+    driver: bridge
 
