@@ -6,9 +6,6 @@ RUN apk update && \
 	apk upgrade && \
 	apk add --no-cache mariadb mariadb-client
 
-# Print the UID/GID for the mysql user
-RUN echo "mysql user details:" && id mysql
-
 # Copy configuration and init script
 COPY init.sql /docker-entrypoint-initdb.d/init.sql
 
@@ -21,10 +18,12 @@ RUN mariadb-install-db --user=mysql --datadir=/var/lib/mysql
 # Expose MariaDB port
 EXPOSE 3306
 
-# Entry script to ensure init.sql runs only on first startup
+# On container startup, check if the "mysql" schema is empty.
+# If it is, run the initialization (install system tables and bootstrap the init.sql).
 CMD ["/bin/sh", "-c", "\
-    if [ ! -d /var/lib/mysql/mysql ]; then \
-        mariadb-install-db --user=mysql --datadir=/var/lib/mysql; \
+    if [ -z \"$(ls -A /var/lib/mysql/mysql 2>/dev/null)\" ]; then \
+        echo 'Initializing database...'; \
+        mariadb-install-db --user=mysql --datadir=/var/lib/mysql && \
         mysqld --user=mysql --bootstrap < /docker-entrypoint-initdb.d/init.sql; \
     fi; \
     exec mysqld --user=mysql --console \
