@@ -1,10 +1,12 @@
 #!/bin/sh
-# Print the mysql user's UID and GID
-echo "MySQL user details: $(id mysql)"
+set -ex
 
-# Optionally, list the permissions of the current directory to debug bind mount issues:
-echo "Directory permissions for /var/lib/mysql:"
-ls -ld /var/lib/mysql
+# Print MySQL user details to stderr
+echo "MySQL user details: $(id mysql)" >&2
+
+# Print directory permissions (for debugging)
+echo "Directory permissions for /var/lib/mysql:" >&2
+ls -ld /var/lib/mysql >&2
 
 # Start MariaDB
 exec mysqld --user=mysql --console
