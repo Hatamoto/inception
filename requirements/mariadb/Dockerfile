@@ -7,7 +7,7 @@ RUN apk update && \
 	apk add --no-cache mariadb mariadb-client
 
 # Copy configuration and init script
-COPY init.sql /docker-entrypoint-initdb.d/init.sql
+COPY conf/init.sql /docker-entrypoint-initdb.d/init.sql
 
 # Prepare MariaDB runtime directory
 RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld

@@ -31,7 +31,7 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 RUN chown -R nginx:nginx /var/www/html && chmod 755 /var/www/html
 
 # Expose port 80 (and 443 if you plan to serve HTTPS)
-EXPOSE 80 
+# EXPOSE 80 
 EXPOSE 443
 
 # Run nginx in the foreground
