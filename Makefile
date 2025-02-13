@@ -43,3 +43,7 @@ up: dirs
 down:
 	@echo "Shutting down containers..."
 	docker compose down
+
+fclean:
+	down
+	sudo rm -rf $(DATA_DIR)
