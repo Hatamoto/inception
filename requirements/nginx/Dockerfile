@@ -20,9 +20,9 @@ RUN mkdir -p /var/log/nginx /var/www/html
 
 # Generate a self-signed certificate (same OpenSSL commands)
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout /etc/ssl/private/nginx-selfsigned.key \
-    -out /etc/ssl/certs/nginx-selfsigned.crt \
-    -subj "/C=FR/ST=Paris/L=Paris/O=42/OU=42/CN=localhost"
+    -keyout /etc/nginx/certs/nginx.key \
+    -out /etc/nginx/certs/nginx.crt \
+    -subj "/C=FI/L=Helsinki/O=Hive/OU=Inception Project/CN=${DOMAIN_NAME}"
 
 # Copy your custom nginx.conf
 COPY conf/nginx.conf /etc/nginx/nginx.conf
