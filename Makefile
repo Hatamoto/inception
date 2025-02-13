@@ -37,9 +37,9 @@ dirs:
 # Build the containers (if needed) and start them.
 up: dirs
 	@echo "Starting containers with docker-compose..."
-	docker-compose up -d
+	docker compose up -d
 
 # Bring the containers down.
 down:
 	@echo "Shutting down containers..."
-	docker-compose down
+	docker compose down
