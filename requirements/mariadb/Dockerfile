@@ -31,4 +31,7 @@ CMD ["/bin/sh", "-c", "\
 "]
 
 # Run MariaDB server
-CMD ["mysqld", "--user=mysql", "--console"]
+# CMD ["mysqld", "--user=mysql", "--console"]
+
+# Use the custom entrypoint
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
