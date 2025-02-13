@@ -17,8 +17,8 @@ WP_UID := 33
 WP_GID := 33
 
 # For MariaDB (e.g., mysql). Adjust as needed.
-DB_UID := 999
-DB_GID := 999
+DB_UID := 101
+DB_GID := 101
 
 .PHONY: dirs up down
 
