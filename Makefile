@@ -29,10 +29,10 @@ dirs:
 	mkdir -p $(DB_DATA_DIR)
 	@echo "Setting permissions for WordPress data directory..."
 	sudo chown -R $(WP_UID):$(WP_GID) $(WP_DATA_DIR)
-	chmod -R 755 $(WP_DATA_DIR)
+	sudo chmod -R 755 $(WP_DATA_DIR)
 	@echo "Setting permissions for MariaDB data directory..."
 	sudo chown -R $(DB_UID):$(DB_GID) $(DB_DATA_DIR)
-	chmod -R 750 $(DB_DATA_DIR)
+	sudo chmod -R 750 $(DB_DATA_DIR)
 
 # Build the containers (if needed) and start them.
 up: dirs
