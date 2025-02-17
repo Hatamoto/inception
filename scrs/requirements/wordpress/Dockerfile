@@ -29,7 +29,7 @@ RUN chown -R www-data:www-data /var/www/html
 # PHP-FPM default port
 EXPOSE 9000
 
-COPY tools/create-wp-config.sh /usr/local/bin/create-wp-config.sh
+COPY conf/create-wp-config.sh /usr/local/bin/create-wp-config.sh
 RUN chmod +x /usr/local/bin/create-wp-config.sh
 ENTRYPOINT ["/usr/local/bin/create-wp-config.sh"]
 RUN rm /usr/local/bin/create-wp-config.sh
