@@ -11,6 +11,9 @@ DATA_DIR := $(HOME_DIR)/data
 WP_DATA_DIR := $(DATA_DIR)/wordpress_data
 DB_DATA_DIR := $(DATA_DIR)/mariadb_data
 
+# Scrs dir for running docker commands etc
+SCRS_DIR := scrs
+
 # Container UID/GID expectations.
 # For WordPress (e.g., www-data). Adjust these if your image uses different IDs.
 WP_UID := 33
@@ -37,15 +40,15 @@ dirs:
 # Build the containers (if needed) and start them.
 up: dirs
 	@echo "Starting containers with docker-compose..."
-	docker compose up -d
+	cd $(SCRS_DIR) && docker compose up -d
 
 # Bring the containers down.
 down:
 	@echo "Shutting down containers..."
-	docker compose down
+	cd $(SCRS_DIR) && docker compose down
 
 clean:
-	docker compose down -v --rmi all
+	cd $(SCRS_DIR) && docker compose down -v --rmi all
 
 fclean: clean
 	sudo rm -rf $(DATA_DIR)
