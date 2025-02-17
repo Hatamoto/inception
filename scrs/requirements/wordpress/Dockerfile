@@ -6,7 +6,6 @@ FROM php:8.1-fpm-alpine
 
 # Install dependencies
 RUN apk add --no-cache \
-	  gnu-tar \
       wget \
       unzip \
       libpng-dev \
@@ -22,7 +21,7 @@ ARG WORDPRESS_VERSION=6.7.2
 WORKDIR /var/www/html
 
 RUN wget https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz -O wordpress.tar.gz \
-    && gtar --no-same-owner --owner=www-data --group=www-data -xzf wordpress.tar.gz --strip-components=1 \
+    && tar -xzf wordpress.tar.gz --strip-components=1 \
     && rm wordpress.tar.gz
 
 RUN chown -R www-data:www-data /var/www/html
