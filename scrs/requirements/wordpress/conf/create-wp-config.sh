@@ -2,10 +2,10 @@
 
 if [ ! -f "/var/www/wp-config.php" ]; then
 cat << EOF > /var/www/wp-config.php
-define('DB_NAME', 'database_name_here');
-define('DB_USER', 'username_here');
-define('DB_PASSWORD', 'password_here');
-define('DB_HOST', 'localhost');
+define('DB_NAME', '$(MARIADB_DATABASE)');
+define('DB_USER', '$(MARIADB_USER)');
+define('DB_PASSWORD', '$(MARIADB_PSW)');
+define('DB_HOST', '$(MARIADB_HOSTNAME)');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 define('AUTH_KEY',         ',VZ?E`V3P,I3t-}+8/-@:( KADO]0K2WH_$TlPIC<CE~2$AOhhZ%:(!w@(a#)d1 ');
