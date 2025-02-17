@@ -13,6 +13,7 @@ RUN apk add --no-cache \
       libxml2-dev \
       libzip-dev \
       oniguruma-dev \
+      mariadb-client \
     && docker-php-ext-install -j$(nproc) mysqli pdo pdo_mysql zip
 
 # Define the build argument
@@ -32,4 +33,8 @@ EXPOSE 9000
 COPY ./conf/create-wp-config.sh .
 RUN sh create-wp-config.sh && rm create-wp-config.sh && \
     chmod -R 0777 wp-content/
+
+COPY ./conf/create-wp-config.sh .
+RUN chmod +x create-wp-config.sh
+ENTRYPOINT ["create-wp-config.sh"]
 CMD ["php-fpm"]

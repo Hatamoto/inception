@@ -6,8 +6,6 @@ services:
     container_name: nginx
     build: requirements/nginx/.
     restart: always
-    #depends_on:
-    #  - mariadb
     ports:
       - 443:443
     volumes:
@@ -30,7 +28,6 @@ services:
       - 3306:3306
     volumes:
       - mariadb_data:/var/lib/mysql
-      #- /home/mburakow/data/mariadb_data:/var/lib/mysql
     networks:
       - network
 
@@ -42,10 +39,10 @@ services:
       - mariadb
     restart: always
     environment:
-      WORDPRESS_DB_HOST: mariadb
-      WORDPRESS_DB_USER: ${MARIADB_USER}
-      WORDPRESS_DB_PASSWORD: ${MARIADB_PSW}
-      WORDPRESS_DB_NAME: ${MARIADB_DATABASE}
+      WP_DB_HOST: ${MARIADB_HOSTNAME}
+      WP_DB_USER: ${MARIADB_USER}
+      WP_DB_PASSWORD: ${MARIADB_PSW}
+      WP_DB_NAME: ${MARIADB_DATABASE}
     ports:
       - 9000:9000
     volumes:
