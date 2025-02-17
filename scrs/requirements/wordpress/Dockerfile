@@ -31,10 +31,8 @@ RUN chown -R www-data:www-data /var/www/html
 EXPOSE 9000
 
 COPY ./conf/create-wp-config.sh .
-RUN sh create-wp-config.sh && rm create-wp-config.sh && \
-    chmod -R 0777 wp-content/
-
-COPY ./conf/create-wp-config.sh .
-RUN chmod +x create-wp-config.sh
-ENTRYPOINT ["create-wp-config.sh"]
+#RUN sh create-wp-config.sh && rm create-wp-config.sh && \
+#    chmod -R 0777 wp-content/
+RUN chmod +x ./create-wp-config.sh && chmod -R 0777 wp-content/
+ENTRYPOINT ["./create-wp-config.sh"]
 CMD ["php-fpm"]

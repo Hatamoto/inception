@@ -16,3 +16,4 @@ if ( ! defined('ABSPATH') ) {
 require_once(ABSPATH . 'wp-settings.php');
 EOF
 fi
+exec "$@"
