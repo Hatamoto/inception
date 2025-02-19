@@ -4,6 +4,9 @@ FROM alpine:3.20
 # Install PHP-FPM
 FROM php:8.1-fpm-alpine
 
+# Define the build argument
+ARG WORDPRESS_VERSION=6.7.2
+
 # Install dependencies
 RUN apk add --no-cache \
       wget \
@@ -14,10 +17,14 @@ RUN apk add --no-cache \
       libzip-dev \
       oniguruma-dev \
       mariadb-client \
+	  bash \
+      curl \
     && docker-php-ext-install -j$(nproc) mysqli pdo pdo_mysql zip
 
-# Define the build argument
-ARG WORDPRESS_VERSION=6.7.2
+# Install WP-CLI
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp
 
 WORKDIR /var/www/html
 
@@ -30,9 +37,8 @@ RUN chown -R www-data:www-data /var/www/html
 # PHP-FPM default port
 EXPOSE 9000
 
-COPY ./conf/create-wp-config.sh .
-#RUN sh create-wp-config.sh && rm create-wp-config.sh && \
-#    chmod -R 0777 wp-content/
-RUN chmod +x ./create-wp-config.sh && chmod -R 0777 wp-content/
-ENTRYPOINT ["./create-wp-config.sh"]
+COPY ./tools/entrypoint.sh .
+RUN chmod +x ./entrypoint.sh && chmod -R 0777 wp-content/
+
+ENTRYPOINT ["./entrypoint.sh"]
 CMD ["php-fpm"]

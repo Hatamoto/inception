@@ -4,6 +4,7 @@
 # Allow server to accept connections on all interfaces.
 [mysqld]
 bind-address=0.0.0.0
+skip-networking=0
 
 # Galera Cluster settings (if used)
 [galera]
