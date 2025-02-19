@@ -1,0 +1,18 @@
+# this is read by the standalone daemon and embedded servers
+[server]
+
+# Allow server to accept connections on all interfaces.
+[mysqld]
+bind-address=0.0.0.0
+
+# Galera Cluster settings (if used)
+[galera]
+
+# this is only for embedded server
+[embedded]
+
+# you can put MariaDB-only options here
+[mariadb]
+
+# use this group for options that older servers don't understand
+[mariadb-10.5]

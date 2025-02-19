@@ -6,7 +6,10 @@ RUN apk update && \
 	apk upgrade && \
 	apk add --no-cache mariadb mariadb-client
 
-# Copy configuration and init script
+# Copy configuration file
+COPY conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
+
+# Copy db init script
 COPY conf/init.sql /docker-entrypoint-initdb.d/init.sql
 RUN chown mysql:mysql /docker-entrypoint-initdb.d/init.sql
 
