@@ -68,6 +68,10 @@ if ! wp core is-installed --allow-root; then
     wp option update siteurl "https://${DOMAIN_NAME}" --allow-root
     wp option update home "https://${DOMAIN_NAME}" --allow-root
 
+	echo "Domain name is ${DOMAIN_NAME}" 
+
+	wp theme install twentytwentythree --activate --allow-root
+
     echo "WordPress installation completed!"
 else
     echo "WordPress is already installed!"
