@@ -1,5 +1,5 @@
 # Use Alpine as the base
-FROM alpine:3.21
+FROM alpine:3.20
 
 # Ensure necessary system files exist
 RUN touch /etc/passwd /etc/group /etc/shadow
@@ -30,8 +30,7 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 # Set ownership and permissions
 RUN chown -R nginx:nginx /var/www/html && chmod 755 /var/www/html
 
-# Expose port 80 (and 443 if you plan to serve HTTPS)
-EXPOSE 80 
+# Expose port 443 for HTTPS only
 EXPOSE 443
 
 # Run nginx in the foreground

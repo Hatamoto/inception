@@ -1,5 +1,5 @@
 # Use Alpine as the base
-FROM alpine:3.21
+FROM alpine:3.20
 
 # Install PHP-FPM
 FROM php:8.1-fpm-alpine
