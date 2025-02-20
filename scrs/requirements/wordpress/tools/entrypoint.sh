@@ -46,13 +46,6 @@ else
     echo "WordPress is already installed!"
 fi
 
-# Get the favicon! This is important!
-if ! wp option get site_icon --allow-root | grep -q '^[1-9][0-9]*$'; then
-    echo "Importing favicon and setting as site icon..."
-    ATTACHMENT_ID=$(wp media import ./favicon.ico --porcelain --allow-root)
-    wp option update site_icon $ATTACHMENT_ID --allow-root
-fi
-
 # Ensure ownership and permissions
 chown -R www-data:www-data /var/www/html
 chmod -R 755 /var/www/html
