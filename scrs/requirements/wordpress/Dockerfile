@@ -34,7 +34,6 @@ RUN wget https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz -O wordpres
 
 RUN chown -R www-data:www-data /var/www/html
 
-# PHP-FPM default port
 EXPOSE 9000
 
 COPY ./tools/entrypoint.sh /usr/local/bin/entrypoint.sh
@@ -42,4 +41,3 @@ COPY ./conf/wp-config.php /usr/local/bin/wp-config.php
 RUN chmod +x /usr/local/bin/entrypoint.sh && chmod -R 0777 wp-content/
 
 ENTRYPOINT [ "sh", "/usr/local/bin/entrypoint.sh" ]
-# CMD ["php-fpm"]

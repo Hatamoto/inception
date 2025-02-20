@@ -26,8 +26,6 @@ RUN chmod 644 /etc/nginx/nginx.conf
 COPY tools/entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-RUN echo "The domain name is: ${DOMAIN_NAME}"
-
 # Set ownership and permissions
 RUN chown -R nginx:nginx /var/www/html && chmod 755 /var/www/html
 
