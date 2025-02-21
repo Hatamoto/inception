@@ -38,6 +38,7 @@ EXPOSE 9000
 
 COPY ./tools/entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY ./conf/wp-config.php /usr/local/bin/wp-config.php
+COPY ./conf/www.conf /usr/local/etc/php-fpm.d/www.conf
 RUN chmod +x /usr/local/bin/entrypoint.sh && chmod -R 0777 wp-content/
 
 ENTRYPOINT [ "sh", "/usr/local/bin/entrypoint.sh" ]

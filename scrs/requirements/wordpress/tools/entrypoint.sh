@@ -39,7 +39,7 @@ if ! wp core is-installed --allow-root; then
         --admin_email="${WP_ADMIN_EMAIL}" \
         --skip-email
 
-	wp theme install twentytwentythree --activate --allow-root
+	wp theme activate twentytwentythree --allow-root
 
     echo "WordPress installation completed!"
 else
